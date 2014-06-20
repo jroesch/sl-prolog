@@ -1,0 +1,7 @@
+module example.
+
+type list :- list(int, list) | nil.
+
+foo :- x.
+
+bar :- y.
