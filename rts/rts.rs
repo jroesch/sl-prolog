@@ -1,5 +1,3 @@
-//type Heap = Vec<Cell>;
-
 struct Heap {
     memory: Vec<Cell>,
     size: uint
@@ -23,8 +21,15 @@ impl Heap {
     fn debug_print(&self) {
         let mut i = 0;
         for cell in self.memory.iter() {
-            println!("{}: {}", i, cell);
+            println!("{}: {} (Bound: {})", i, cell, !self.is_unbound(i));
             i = i + 1;
+        }
+    }
+
+    fn is_unbound(&self, cell_k: uint) -> bool {
+        match self.memory.get(cell_k) {
+            &Ref(k) => k == cell_k,
+            _ => false
         }
     }
 }
@@ -32,6 +37,7 @@ impl Heap {
 #[deriving(Show)]
 enum Cell {
     Ref(uint),
+    Struct
 }
 
 static INIT_HEAPSIZE: uint = 10;
